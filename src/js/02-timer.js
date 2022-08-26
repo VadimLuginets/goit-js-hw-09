@@ -1,12 +1,24 @@
 import 'flatpickr/dist/flatpickr.min.css';
 import flatpickr from 'flatpickr';
+
 const startBtn = document.querySelector('button[data-start]');
 const daysCounter = document.querySelector('[data-days]');
 const hoursCounter = document.querySelector('[data-hours]');
 const minutesCounter = document.querySelector('[data-minutes]');
 const secondsCounter = document.querySelector('[data-seconds]');
+
 let selectedDate = null;
 let interval = null;
+
+startBtn.setAttribute('disabled', true);
+
+startBtn.addEventListener('click', () => {
+  startBtn.setAttribute('disabled', true);
+  interval = setInterval(() => {
+    countdown(selectedDate);
+    selectedDate -= 1000;
+  }, 1000);
+});
 
 flatpickr('#datetime-picker', {
   enableTime: true,
@@ -21,15 +33,6 @@ flatpickr('#datetime-picker', {
     startBtn.removeAttribute('disabled');
     selectedDate = selectedDates[0].getTime() - new Date().getTime();
   },
-});
-
-startBtn.setAttribute('disabled', true);
-startBtn.addEventListener('click', () => {
-  startBtn.setAttribute('disabled', true);
-  interval = setInterval(() => {
-    countdown(selectedDate);
-    selectedDate -= 1000;
-  }, 1000);
 });
 
 function countdown(ms) {
@@ -52,8 +55,8 @@ function countdown(ms) {
   const minutes = Math.floor(((ms % day) % hour) / minute);
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
-  daysCounter.textContent = days;
-  hoursCounter.textContent = hours;
-  minutesCounter.textContent = minutes;
-  secondsCounter.textContent = seconds;
+  daysCounter.textContent = days.toString().padStart(2, '0');
+  hoursCounter.textContent = hours.toString().padStart(2, '0');
+  minutesCounter.textContent = minutes.toString().padStart(2, '0');
+  secondsCounter.textContent = seconds.toString().padStart(2, '0');
 }

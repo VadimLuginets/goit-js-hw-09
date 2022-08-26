@@ -16,3 +16,31 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.timer {
+  display: flex;
+  margin-top: 40px;
+}
+
+.label {
+  color: brown;
+  text-align: center;
+  padding: 20px;
+  background-color: rgb(4, 54, 74);
+  border: #1fc5b2;
+  border: #fafafa 2px solid;
+}
+
+.field {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.value {
+  align-items: center;
+  text-align: center;
+  background-color: rgb(4, 54, 74);
+  color: rgb(43, 176, 125);
+  padding: 20px;
+  border: #fafafa 2px solid;
+}
