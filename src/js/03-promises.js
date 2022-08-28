@@ -8,14 +8,14 @@ formEl.addEventListener('submit', e => {
     stepDelay = Number(formEl.step.value);
 
     for (let index = 1; index <= formEl.amount.value; index++) {
+      currentStep += stepDelay;
       createPromise(index, currentStep)
         .then(({ position, delay }) => {
-          alert(`Fulfilled promise ${position} in ${delay} ms`);
+          console.log(`Fulfilled promise ${position} in ${delay} ms`);
         })
         .catch(({ position, delay }) => {
-          alert(`Rejected promise ${position} in ${delay} ms`);
+          console.log(`Rejected promise ${position} in ${delay} ms`);
         });
-      currentStep += stepDelay;
     }
   }, Number(formEl.delay.value));
 });
